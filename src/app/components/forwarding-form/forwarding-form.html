@@ -1,109 +1,120 @@
 <div class="container mt-5 mb-5">
   <div class="card shadow">
     <div class="card-header bg-primary text-white">
-      <h2 class="mb-0">Mail Forwarding Services (Hongkong Post)</h2>
+      <h2 class="mb-0">郵件轉派服務 Mail Forwarding Services</h2>
     </div>
     <div class="card-body">
       <form [formGroup]="forwardingForm" (ngSubmit)="onSubmit()">
         
-        <h5 class="border-bottom pb-2">Contact Information / 聯絡資料</h5>
+        <h5 class="border-bottom pb-2">聯絡資料 Contact Information</h5>
         <div class="row mb-3">
           <div class="col-md-6">
-            <label class="form-label">Name (Principal Applicant)</label>
+            <label class="form-label">姓名 Name</label>
             <input type="text" class="form-control" formControlName="applicantName"
                    [class.is-invalid]="isFieldInvalid('applicantName')"
-                   placeholder="English Block Letters">
-            <div class="invalid-feedback">Applicant name is required.</div>
+                   placeholder="英文正楷 English Block Letters">
+            <div class="invalid-feedback">請輸入申請人姓名。 Applicant name is required.</div>
           </div>
           
           <div class="col-md-6">
-            <label class="form-label">HKID / Passport (First 4 chars)</label>
+            <label class="form-label">香港身份證或護照 (首4位) HKID / Passport (First 4 chars)</label>
             <input type="text" class="form-control" formControlName="hkidPassport"
                    [class.is-invalid]="isFieldInvalid('hkidPassport')">
-            <div class="invalid-feedback">Must include English alphabet and first 3 digits.</div>
+            <div class="invalid-feedback">必須包括1個英文字母及首3位數字。 Must include English alphabet and first 3 digits.</div>
           </div>
         </div>
 
         <div class="row mb-3">
           <div class="col-md-6">
-            <label class="form-label">Email Address</label>
+            <label class="form-label">電郵地址 Email Address</label>
             <input type="email" class="form-control" formControlName="email"
                    [class.is-invalid]="isFieldInvalid('email')">
-            <div class="invalid-feedback">Please enter a valid email address.</div>
+            <div class="invalid-feedback">請輸入有效的電郵地址。 Please enter a valid email address.</div>
           </div>
           
           <div class="col-md-6">
-            <label class="form-label">Tel No.</label>
+            <label class="form-label">電話號碼 Tel No.</label>
             <input type="text" class="form-control" formControlName="telNo"
                    [class.is-invalid]="isFieldInvalid('telNo')">
             <div class="invalid-feedback">
-              <span *ngIf="f['telNo'].errors?.['required']">Phone number is required.</span>
-              <span *ngIf="f['telNo'].errors?.['pattern']">Must be exactly 8 digits.</span>
+              <span *ngIf="f['telNo'].errors?.['required']">請輸入電話號碼。 Phone number is required.</span>
+              <span *ngIf="f['telNo'].errors?.['pattern']">必須為剛好8位數字。 Must be exactly 8 digits.</span>
             </div>
           </div>
         </div>
 
-        <h5 class="border-bottom pb-2 mt-4">Old Address Details / 單位資料</h5>
+        <h5 class="border-bottom pb-2 mt-4">舊地址資料 Old Address Details</h5>
         <div class="row mb-3">
           <div class="col-md-4">
-            <label class="form-label">House Name</label>
+            <label class="form-label">大廈名稱 House</label>
             <select class="form-select" formControlName="houseName"
                     [class.is-invalid]="isFieldInvalid('houseName')">
-              <option value="">Select House...</option>
-              <option *ngFor="let house of houses" [value]="house">{{house}}</option>
-            </select>
-            <div class="invalid-feedback">Please select a house.</div>
+              <option value="">--請選擇大廈 Select House--</option>
+              <option *ngFor="let house of houses" [value]="house.value">
+                {{ house.label }}
+              </option>            </select>
+            <div class="invalid-feedback">請選擇大廈名稱。 Please select a house.</div>
           </div>
           <div class="col-md-4">
-            <label class="form-label">Floor</label>
+            <label class="form-label">樓層 Floor</label>
             <input type="text" class="form-control" formControlName="floor"
                    [class.is-invalid]="isFieldInvalid('floor')">
-            <div class="invalid-feedback">Floor is required.</div>
+            <div class="invalid-feedback">請輸入樓層。 Floor is required.</div>
           </div>
           <div class="col-md-4">
-            <label class="form-label">Flat</label>
+            <label class="form-label">單位 / 室 Flat / Room</label>
             <input type="text" class="form-control" formControlName="flat"
                    [class.is-invalid]="isFieldInvalid('flat')">
-            <div class="invalid-feedback">Flat is required.</div>
+            <div class="invalid-feedback">請輸入單位或室。 Flat or Room is required.</div>
           </div>
         </div>
 
-        <h5 class="border-bottom pb-2 mt-4">Mail Forwarding Arrangement</h5>
+        <h5 class="border-bottom pb-2 mt-4">郵件轉派安排 Mail Forwarding Arrangement</h5>
         <div class="mb-3">
-          <label class="form-label">New Address</label>
+          <label class="form-label">新轉派地址 New Address</label>
           <textarea class="form-control" formControlName="newAddress" rows="3"
                     [class.is-invalid]="isFieldInvalid('newAddress')"></textarea>
-          <div class="invalid-feedback">New forwarding address is required.</div>
-          <small class="text-muted">Each application covers one old and one new address only.</small>
+          <div class="invalid-feedback">請輸入新轉派地址。 New forwarding address is required.</div>
+          <small class="text-muted">每份申請表只適用於轉派一個舊地址至一個新地址。 Each application covers one old and one new address only.</small>
         </div>
 
-        <div class="form-check mt-4 p-3 bg-light rounded" [class.border]="isFieldInvalid('declarationAgreed')" [class.border-danger]="isFieldInvalid('declarationAgreed')">
-          <input class="form-check-input" type="checkbox" formControlName="declarationAgreed" id="decl">
-          <label class="form-check-label" for="decl">
-            I declare that the information provided is true and accurate in every respect.
-          </label>
-          <div class="text-danger small" *ngIf="isFieldInvalid('declarationAgreed')">
-            You must agree to the declaration before submitting.
+        <!-- Declaration Box -->
+        <div class="mt-4 p-3 bg-secondary-subtle border border-secondary border-1" 
+             [class.border-danger]="isFieldInvalid('declarationAgreed')">
+             
+          <div class="form-check">
+            <input class="form-check-input border-secondary border-1" type="checkbox" formControlName="declarationAgreed" id="decl">
+            <label class="form-check-label ms-1 fw-medium" for="decl">
+              本人聲明此表格內所填報的資料均屬確實無訛。<br>
+              I declare that the information provided is true and accurate in every respect.
+            </label>
+          </div>
+          
+          <div class="text-danger small mt-2 ps-4" *ngIf="isFieldInvalid('declarationAgreed')">
+            <i class="bi bi-exclamation-circle-fill me-1"></i> 您必須同意此聲明方可遞交申請。 You must agree to the declaration before submitting.
           </div>
         </div>
 
+        <!-- Warning Alert -->
         <div *ngIf="hasLiveErrors" class="alert alert-warning mt-4 shadow-sm">
           <i class="bi bi-exclamation-triangle-fill me-2"></i>
-          <strong>Form Not Ready:</strong> Please review the highlighted fields. 
-          Once corrected, you can submit your application for the <strong>{{ f['houseName'].value || 'selected unit' }}</strong>.
+           請填妥所有欄位。修正後即可<strong>遞交您的申請。</strong> <br>
+          Please input all of the fields. Once corrected, you can <strong>submit your application.</strong>
         </div>
 
         <div class="mt-4">
           <button type="submit" class="btn btn-success btn-lg w-100" [disabled]="forwardingForm.invalid">
-            Submit Application to Post Office
+            遞交申請 Submit Application
           </button>
         </div>
       </form>
     </div>
 
     <div class="card-footer text-muted small">
+      查詢請聯絡大埔派遞局：2653 3047 <br />
+      地址：大埔汀角路1號大埔政府合署地下 <br />
       For enquiries, contact Tai Po Delivery Office: 2653 3047 <br />
-      Address: G/F, Tai Po Government Offices, 1 Ting Kok Road, Tai Po 
+      Address: G/F, Tai Po Government Offices, 1 Ting Kok Road, Tai Po
     </div>
   </div>
 </div>

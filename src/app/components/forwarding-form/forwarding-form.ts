@@ -20,23 +20,27 @@ export class ForwardingFormComponent {
 
   // Mapping the houses from the PDF [cite: 15-31]
   houses = [
-    'Wang Yan House',
-    'Wang Kin House',
-    'Wang Chi House',
-    'Wang Sun House',
-    'Wang Cheong House',
-    'Wang Tai House',
-    'Wang Shing House',
-    'Wang Tao House',
+    { value: 'Wang Yan House', label: '宏仁閣 Wang Yan House' },
+    { value: 'Wang Kin House', label: '宏建閣 Wang Kin House' },
+    { value: 'Wang Chi House', label: '宏緻閣 Wang Chi House' },
+    { value: 'Wang Sun House', label: '宏新閣 Wang Sun House' },
+    { value: 'Wang Cheong House', label: '宏昌閣 Wang Cheong House' },
+    { value: 'Wang Tai House', label: '宏泰閣 Wang Tai House' },
+    { value: 'Wang Shing House', label: '宏盛閣 Wang Shing House' },
+    { value: 'Wang Tao House', label: '宏道閣 Wang Tao House' }
   ];
+  
 
   constructor(private fb: FormBuilder) {
     this.forwardingForm = this.fb.group({
-      applicantName: ['', Validators.required],
+      applicantName: ['', [Validators.required, Validators.pattern('^[A-Z ]+$')]],
       email: ['', [Validators.email]],
       telNo: ['', [Validators.required, Validators.pattern('^[0-9]{8}$')]],
-      hkidPassport: ['', [Validators.required, Validators.maxLength(4)]], // Alphabet + 3 digits
-      houseName: ['', Validators.required],
+      hkidPassport: ['', [
+        Validators.required, 
+        Validators.pattern('^[a-zA-Z][0-9]{3}$')
+      ]],
+            houseName: ['', Validators.required],
       floor: ['', Validators.required],
       flat: ['', Validators.required],
       newAddress: ['', Validators.required],

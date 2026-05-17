@@ -1,1 +1,14 @@
-/* Add application styles & imports to this file! */
+/* Darken the default borders for better visibility and accessibility */
+.form-control, 
+.form-select,
+.form-check-input {  /* <--- Added this to target checkboxes */
+  border: 1px solid #94a3b8 !important; /* A clean, medium grey slate color */
+}
+
+/* Ensure the focus transition still works nicely when clicked */
+.form-control:focus, 
+.form-select:focus,
+.form-check-input:focus { /* <--- Added this for checkbox focus states */
+  border-color: #86b7fe !important;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25) !important;
+}
