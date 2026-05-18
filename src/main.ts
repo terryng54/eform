@@ -10,12 +10,6 @@ import { ForwardingFormComponent } from './app/components/forwarding-form/forwar
   standalone: true,
   imports: [ForwardingFormComponent],
   template: `
-    <nav class="navbar navbar-dark bg-dark mb-4">
-      <div class="container-fluid">
-        <span class="navbar-brand mb-0 h1">Hongkong Post e-form</span>
-      </div>
-    </nav>
-    
     <main>
       <app-forwarding-form></app-forwarding-form>
     </main>
