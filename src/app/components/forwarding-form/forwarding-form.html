@@ -11,14 +11,16 @@
           <div class="col-md-6">
             <label class="form-label">姓名 Name</label>
             <input type="text" class="form-control" formControlName="applicantName"
+                   style="text-transform: uppercase;"
                    [class.is-invalid]="isFieldInvalid('applicantName')"
                    placeholder="英文正楷 English Block Letters">
-            <div class="invalid-feedback">請輸入申請人姓名。 Applicant name is required.</div>
+            <div class="invalid-feedback">請輸入申請人英文姓名。 Applicant name is required.</div>
           </div>
           
           <div class="col-md-6">
             <label class="form-label">香港身份證或護照 (首4位) HKID / Passport (First 4 chars)</label>
             <input type="text" class="form-control" formControlName="hkidPassport"
+                   style="text-transform: uppercase;"
                    [class.is-invalid]="isFieldInvalid('hkidPassport')">
             <div class="invalid-feedback">必須包括1個英文字母及首3位數字。 Must include English alphabet and first 3 digits.</div>
           </div>
@@ -75,7 +77,7 @@
           <textarea class="form-control" formControlName="newAddress" rows="3"
                     [class.is-invalid]="isFieldInvalid('newAddress')"></textarea>
           <div class="invalid-feedback">請輸入新轉派地址。 New forwarding address is required.</div>
-          <small class="text-muted">每份申請表只適用於轉派一個舊地址至一個新地址。 Each application covers one old and one new address only.</small>
+          <small class="text-muted">每份申請表只適用於轉派一個舊地址至一個新地址<strong>(轉派有效期為1年)</strong>。 Each application covers one old and one new address only<strong>(valid for 1 year)</strong>. </small>
         </div>
 
         <!-- Declaration Box -->

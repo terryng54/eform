@@ -33,7 +33,7 @@ export class ForwardingFormComponent {
 
   constructor(private fb: FormBuilder) {
     this.forwardingForm = this.fb.group({
-      applicantName: ['', [Validators.required, Validators.pattern('^[A-Z ]+$')]],
+      applicantName: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]+$')]],
       email: ['', [Validators.email]],
       telNo: ['', [Validators.required, Validators.pattern('^[0-9]{8}$')]],
       hkidPassport: ['', [
